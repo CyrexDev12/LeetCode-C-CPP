@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+int searchInsert(int* nums, int numSize, int target) {
+    int left = 0; 
+    int right = numSize - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; 
+
+        if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+
+int main() {
+    int nums[] = {1, 2, 3, 4, 6};
+    int index = searchInsert(nums, 5, 5);
+    printf("The position returned is %d\n", index);
+    return 0;
+}

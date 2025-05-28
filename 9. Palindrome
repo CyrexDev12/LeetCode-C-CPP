@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isPalindrome(int x) {
+    if (x < 0) return false;  // Negative numbers are not palindromes
+
+    int original = x;
+    int reversed = 0;
+
+    while (x > 0) {
+        int digit = x % 10;
+        reversed = reversed * 10 + digit;
+        x /= 10;
+    }
+
+    return original == reversed;
+}
+
+int main() {
+    int test1 = 121;
+    int test2 = 123;
+    int test3 = -121;
+
+    printf("Is %d a palindrome? %s\n", test1, isPalindrome(test1) ? "Yes" : "No");
+    printf("Is %d a palindrome? %s\n", test2, isPalindrome(test2) ? "Yes" : "No");
+    printf("Is %d a palindrome? %s\n", test3, isPalindrome(test3) ? "Yes" : "No");
+
+    return 0;
+}

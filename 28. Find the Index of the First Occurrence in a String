@@ -1,0 +1,19 @@
+#include <string.h>
+
+int strStr(char* haystack, char* needle) {
+    int m = strlen(needle);
+    int n = strlen(haystack);
+
+    if (m == 0) return 0;  // Edge case: empty needle
+
+    for (int i = 0; i <= n - m; i++) {
+        int j;
+        for (j = 0; j < m; j++) {
+            if (haystack[i + j] != needle[j]) {
+                break;
+            }
+        }
+        if (j == m) return i;  // Found full match
+    }
+    return -1;
+}

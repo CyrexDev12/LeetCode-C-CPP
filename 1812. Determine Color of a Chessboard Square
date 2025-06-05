@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool squareIsWhite(const char *s) {
+    int column = s[0] - 'a';  // Convert 'a'-'h' to 0-7
+    int row = s[1] - '1';     // Convert '1'-'8' to 0-7
+
+    return (column + row) % 2 != 0;  // true if white, false if black
+}
+
+

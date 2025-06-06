@@ -1,0 +1,70 @@
+#define TABLE_SIZE 10007  // A prime number for better distribution
+
+typedef struct Node {
+    int key;
+    struct Node* next;
+} Node;
+
+Node* hashTable[TABLE_SIZE];
+
+// Hash function to map keys to table indices
+int hash(int key) {
+    return abs(key) % TABLE_SIZE;
+}
+
+// Initialize the hash table
+void initializeSet() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        hashTable[i] = NULL;
+    }
+}
+
+// Add an element to the set
+void add(int key) {
+    int h = hash(key);
+    Node* curr = hashTable[h];
+    while (curr) {
+        if (curr->key == key) return;  // Element already exists
+        curr = curr->next;
+    }
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->key = key;
+    newNode->next = hashTable[h];
+    hashTable[h] = newNode;
+}
+
+// Check if an element exists in the set
+int contains(int key) {
+    int h = hash(key);
+    Node* curr = hashTable[h];
+    while (curr) {
+        if (curr->key == key) return 1;  // Element found
+        curr = curr->next;
+    }
+    return 0;  // Element not found
+}
+
+// Free the memory allocated for the set
+void freeSet() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        Node* curr = hashTable[i];
+        while (curr) {
+            Node* temp = curr;
+            curr = curr->next;
+            free(temp);
+        }
+        hashTable[i] = NULL;
+    }
+}
+
+bool containsDuplicate(int* nums, int numsSize) {
+    initializeSet(); 
+
+    for (int i = 0; i < numsSize; i++) {
+        if (contains(nums[i])) {
+            return true;
+        } 
+        add(nums[i]);
+    }
+    return false;
+}

@@ -1,0 +1,24 @@
+class Solution {
+public:
+// Given a string S, we must delete the minumum possible number of characters from s to make it fancy 
+// No three consecutive characters are equal 
+string makeFancyString(string s) {
+   string result; 
+   int count = -1; 
+    // We use size_t as it will be gaurenteed to be large enough to hold the size of any object in memory 
+   for (size_t i = 0; i < s.length(); ++i) {
+    if (i > 0 && s[i] == s[i - 1]) {
+        count++;
+    } else {
+        count = 1;
+    }
+    // If the count is greater than 3, we simply don't add that char to the new string 
+
+    if (count < 3) {
+        result += s[i];
+    }
+}
+
+    return result; 
+}
+};

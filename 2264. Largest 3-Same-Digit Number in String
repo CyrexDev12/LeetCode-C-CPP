@@ -1,0 +1,30 @@
+class Solution {
+
+private: 
+    vector<string> sameDigits = {"999", "888", "777", "666", "555", "444", "333", "222", "111", "000"};
+
+    bool contains(string sameDigitNum, string num) {
+        for (int i = 0; i <= num.length() - 3; i++) {
+            if (num[i] == sameDigitNum[0] && num[i + 1] == sameDigitNum[1] &&
+            num[i + 2] == sameDigitNum[2]) {
+                return true;
+            }
+        }
+        return false; 
+
+    }
+
+public:
+
+
+
+    string largestGoodInteger(string num) {
+        for (string s : sameDigits) {
+            if (contains(s, num)) {
+                return s;
+            }
+        }
+        return "";
+    }
+
+};
